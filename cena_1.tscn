@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck2bosu8kkhcx"]
+
+[ext_resource type="Texture2D" uid="uid://twvccu6cv0ao" path="res://icon.svg" id="1_0t6r7"]
+[ext_resource type="PackedScene" uid="uid://cn6afyy2wcayr" path="res://player.tscn" id="2_gvj5t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxyn2"]
+size = Vector2(65, 650)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi7dr"]
+size = Vector2(64, 649)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyikb"]
+size = Vector2(1134, 20)
+
+[node name="Cena 1" type="Node2D"]
+
+[node name="Paredes" type="StaticBody2D" parent="."]
+
+[node name="Esquerda" type="CollisionShape2D" parent="Paredes"]
+position = Vector2(32.5, 324)
+shape = SubResource("RectangleShape2D_uxyn2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Paredes/Esquerda"]
+position = Vector2(0, 1)
+scale = Vector2(0.507813, 5.0625)
+texture = ExtResource("1_0t6r7")
+
+[node name="Direita" type="CollisionShape2D" parent="Paredes"]
+position = Vector2(1122, 324.5)
+shape = SubResource("RectangleShape2D_gi7dr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Paredes/Direita"]
+position = Vector2(0, 1)
+scale = Vector2(0.507813, 5.0625)
+texture = ExtResource("1_0t6r7")
+
+[node name="Chão" type="CollisionShape2D" parent="Paredes"]
+position = Vector2(573, 639)
+shape = SubResource("RectangleShape2D_hyikb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Paredes/Chão"]
+position = Vector2(-3.05176e-05, -1.5)
+scale = Vector2(8.84375, 0.164063)
+texture = ExtResource("1_0t6r7")
+
+[node name="Player" parent="." instance=ExtResource("2_gvj5t")]

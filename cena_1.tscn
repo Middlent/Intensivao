@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck2bosu8kkhcx"]
+[gd_scene load_steps=10 format=3 uid="uid://ck2bosu8kkhcx"]
 
 [ext_resource type="Texture2D" uid="uid://twvccu6cv0ao" path="res://icon.svg" id="1_0t6r7"]
 [ext_resource type="PackedScene" uid="uid://cn6afyy2wcayr" path="res://player.tscn" id="2_gvj5t"]
+[ext_resource type="Texture2D" uid="uid://xpfy6cbcjrm6" path="res://FreeKnight_v1/Colour2/NoOutline/120x80_PNGSheets/_Idle.png" id="3_m0mhd"]
+[ext_resource type="Script" path="res://inimigo.gd" id="3_pd4wr"]
+[ext_resource type="PackedScene" uid="uid://bike2hddxwno" path="res://hit_box.tscn" id="5_8tmed"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxyn2"]
 size = Vector2(65, 650)
@@ -12,9 +15,14 @@ size = Vector2(64, 649)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyikb"]
 size = Vector2(1134, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsauf"]
+size = Vector2(17.3295, 25.5639)
+
 [node name="Cena 1" type="Node2D"]
 
 [node name="Paredes" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
 
 [node name="Esquerda" type="CollisionShape2D" parent="Paredes"]
 position = Vector2(32.5, 324)
@@ -43,4 +51,50 @@ position = Vector2(-3.05176e-05, -1.5)
 scale = Vector2(8.84375, 0.164063)
 texture = ExtResource("1_0t6r7")
 
-[node name="Player" parent="." instance=ExtResource("2_gvj5t")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("2_gvj5t")]
+collision_mask = 18
+
+[node name="Inimigo" type="CharacterBody2D" parent="."]
+position = Vector2(813, 560)
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("3_pd4wr")
+
+[node name="Colisao" type="CollisionShape2D" parent="Inimigo"]
+position = Vector2(0.5, 5.80066)
+scale = Vector2(3.52, 4.75676)
+shape = SubResource("RectangleShape2D_xsauf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Inimigo"]
+position = Vector2(-17, -64)
+scale = Vector2(3.16, 3.16)
+texture = ExtResource("3_m0mhd")
+flip_h = true
+hframes = 10
+
+[node name="HitBox" parent="Inimigo" instance=ExtResource("5_8tmed")]
+collision_layer = 8
+collision_mask = 32
+
+[node name="Inimigo2" type="CharacterBody2D" parent="." groups=["Goblin"]]
+position = Vector2(279, 580)
+scale = Vector2(0.680001, 0.680001)
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("3_pd4wr")
+
+[node name="Colisao" type="CollisionShape2D" parent="Inimigo2"]
+position = Vector2(-28, 2)
+scale = Vector2(3.52, 4.75676)
+shape = SubResource("RectangleShape2D_xsauf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Inimigo2"]
+position = Vector2(-17, -64)
+scale = Vector2(3.16, 3.16)
+texture = ExtResource("3_m0mhd")
+hframes = 10
+
+[node name="HitBox" parent="Inimigo2" instance=ExtResource("5_8tmed")]
+position = Vector2(-28, 0)
+collision_layer = 8
+collision_mask = 32
